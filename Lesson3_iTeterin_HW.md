@@ -227,3 +227,5 @@ _EOF_
    Результат 
 
    ![image-20230618164707885](C:\Users\itete\AppData\Roaming\Typora\typora-user-images\image-20230618164707885.png) 
+
+   
