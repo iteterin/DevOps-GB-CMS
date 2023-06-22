@@ -1,0 +1,33 @@
+---
+- name: Obtain SSO token with using username/password credentials
+  ovirt.ovirt.ovirt_auth:
+    url: https://eleanora.local/ovirt-engine/api
+    username: admin@internal
+    ca_file: /etc/pki/ca-trust/extracted/pem/eleanora.pem
+    password: "{{ ovirtvm_password }}"
+
+- name: Deploy VM "{{ vm_name }}"
+  ovirt.ovirt.ovirt_vm:
+    auth: "{{ ovirt_auth }}"
+    name: "{{ vm_name }}"
+    template: "{{ vm_template }}"
+    cluster: "Default"
+    state: "running"
+    cloud_init:
+      host_name: "{{ vm_host_name }}"
+      user_name: "{{ vm_user_name }}"
+      root_password: "{{ vm_root_password }}"
+      timezone: "Europe/Moscow"
+      authorized_ssh_keys: "{{ ssh_keys }}"
+      nic_name: "enp1s0"
+      dns_search: ".local"
+      dns_servers: "10.78.0.1 212.1.224.6"
+      nic_boot_protocol: "dhcp"
+      nic_boot_protocol_v6: "none"
+    cloud_init_persist: true
+    wait: true
+    
+- name: Revoke the SSO token
+  ovirt_auth:
+    state: absent
+    ovirt_auth: "{{ ovirt_auth }}"
