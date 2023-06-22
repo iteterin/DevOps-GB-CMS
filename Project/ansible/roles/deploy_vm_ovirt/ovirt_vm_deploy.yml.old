@@ -1,0 +1,53 @@
+---
+- name: ovirt ansible deploy
+  hosts: localhost
+  connection: local
+  vars:
+    vm_name: "testvm"
+    vm_template: "TMPL_Ubuntu20_04"
+    vm_host_name: "testvm.local"
+    vm_user_name: "sa"
+  vars_files:
+    # Contains encrypted `engine_password` varibale using ansible-vault
+    - vars/password.yml
+    - vars/ovirtvm_vars.yml
+
+  collections:
+    - ovirt.ovirt
+
+  tasks:
+    - block:
+        # The use of ovirt.ovirt before ovirt_auth is to check if the collection is correctly loaded
+        - name: Obtain SSO token with using username/password credentials
+          ovirt.ovirt.ovirt_auth:
+            url: https://eleanora.local/ovirt-engine/api
+            username: admin@internal
+            ca_file: /etc/pki/ca-trust/extracted/pem/eleanora.pem
+            password: "{{ ovirtvm_password }}"
+
+        - name: Run VM with cloud init, with multiple network interfaces
+          ovirt.ovirt.ovirt_vm:
+            auth: "{{ ovirt_auth }}"
+            name: "{{ vm_name }}"
+            template: "{{ vm_template }}"
+            cluster: "Default"
+            state: "running"
+            cloud_init:
+              host_name: "{{ vm_host_name }}"
+              user_name: "{{ vm_user_name }}"
+              root_password: "{{ vm_root_password }}"
+              timezone: "Europe/Moscow"
+              authorized_ssh_keys: "{{ ssh_keys }}"
+              nic_name: "enp1s0"
+              dns_search: ".local"
+              dns_servers: "10.78.0.1 212.1.224.6"
+              nic_boot_protocol: "dhcp"
+              nic_boot_protocol_v6: "none"
+            cloud_init_persist: true
+            wait: true
+    
+      always:
+        - name: Always revoke the SSO token
+          ovirt_auth:
+            state: absent
+            ovirt_auth: "{{ ovirt_auth }}"

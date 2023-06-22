@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+  - vars/password.yml
+  - vars/ovirtvm_vars.yml
+
+  roles:
+    - role: deploy_vm_ovirt
+      vars:
+        vm_name: "ha_proxy.local"
+      tags: proxy
+    - role: deploy_vm_ovirt 
+      vars:
+        vm_name: "app01.local"
+      tags: app
+    - role: deploy_vm_ovirt
+      vars: 
+        vm_name: "app02.local" 
+      tags: app
+    - role: deploy_vm_ovirt
+      vars:
+        vm_name: "mysql_db.local"
+      tags: db

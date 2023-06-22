@@ -1,0 +1,4 @@
+ssh_keys: /home/sa/.ssh/id_rsa.pub
+vm_template: "TMPL_Ubuntu20_04"
+vm_host_name: "{{ vm_name }}"
+vm_user_name: "sa"
