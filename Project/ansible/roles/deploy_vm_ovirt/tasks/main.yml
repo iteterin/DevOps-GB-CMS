@@ -26,6 +26,30 @@
       nic_boot_protocol_v6: "none"
     cloud_init_persist: true
     wait: true
+
+- name: Stop VM
+  ovirt.ovirt.ovirt_vm:
+    auth: "{{ ovirt_auth }}"
+    state: "stopped"
+    name: "{{ vm_name }}"
+    wait: true
+
+- name: Change disk size
+  ovirt_disk:
+        auth: "{{ ovirt_auth }}"
+        size: "16GiB"
+        name: "GlanceDisk-b290d06"
+        vm_name: "{{ vm_name }}"
+        interface: virtio_scsi
+        state: attached
+        wait: true
+
+- name: Start VM
+  ovirt.ovirt.ovirt_vm:
+    auth: "{{ ovirt_auth }}"
+    state: "running"
+    name: "{{ vm_name }}"
+    wait: true
     
 - name: Revoke the SSO token
   ovirt_auth:

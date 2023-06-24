@@ -1,0 +1,15 @@
+mysql_packages:
+      - mariadb-client
+      - mariadb-server
+      - python3-mysqldb
+mysql_python_package_debian: python3-mysqldb
+mysql_enabled_on_startup: true
+mysql_port: "3306"
+mysql_bind_address: '0.0.0.0'
+mysql_databases:
+  - name: wp_geek
+mysql_users:
+  - name: wp_geek_user
+    host: "%"
+    password: geek_pwd
+    priv: "wp_geek.*:ALL"

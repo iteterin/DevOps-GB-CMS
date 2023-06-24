@@ -1,0 +1,9 @@
+---
+- hosts: mysqldb 
+  become: yes
+  vars_files:
+    - vars/main.yml
+    - vars/mysql_vars.yml
+  roles:
+    #- { role: geerlingguy.mysql, tags: [mysql] }
+    - role: geerlingguy.mysql
