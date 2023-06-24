@@ -1,0 +1,13 @@
+---
+# vars file for deploy_mysql
+#
+
+mysql_root_password: "root4ever"
+mysql_databases:
+  - name: wp_geek
+mysql_users:
+  - name: wp_geek_user
+    host: "%"
+    password: geek_pwd
+    priv: "wp_geek.*:ALL"
+

@@ -9,7 +9,11 @@
   roles:
     - role: deploy_vm_ovirt
       vars:
-        vm_name: "ha_proxy.local"
+        vm_name: "mysqldb.local"
+      tags: db
+    - role: deploy_vm_ovirt
+      vars:
+        vm_name: "haproxy.local"
       tags: proxy
     - role: deploy_vm_ovirt 
       vars:
@@ -19,7 +23,3 @@
       vars: 
         vm_name: "app02.local" 
       tags: app
-    - role: deploy_vm_ovirt
-      vars:
-        vm_name: "mysql_db.local"
-      tags: db
