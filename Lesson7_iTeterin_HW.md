@@ -10,7 +10,6 @@
 
 ```bash
 ansible-galaxy install geerlingguy.nginx geerlingguy.php
-ansible-galaxy collection install community.crypto
 ```
 
 Инициализируем роль:
