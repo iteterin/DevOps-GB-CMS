@@ -9,7 +9,7 @@
 Устанавливаем зависимости для вэб сервера, роль для деплоя Wordpress у нас уже есть, модифицируем ее позже: 
 
 ```bash
-ansible-galaxy install geerlingguy.nginx geerlingguy.php community.crypto.x509_certificate
+ansible-galaxy install geerlingguy.nginx geerlingguy.php
 ansible-galaxy collection install community.crypto
 ```
 
