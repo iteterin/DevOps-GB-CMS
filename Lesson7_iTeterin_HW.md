@@ -196,9 +196,9 @@ _EOF_
 - name: Download and unpack latest WordPress
   unarchive:
     src: https://wordpress.org/latest.tar.gz
-    dest: "/var/www/html"
+    dest: "/var/www/html/"
     remote_src: yes
-    creates: "/var/www/html"
+    creates: "/var/www/html/wordpress/"
 
 - name: Set ownership
   file:
