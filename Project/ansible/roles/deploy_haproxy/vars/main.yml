@@ -1,0 +1,9 @@
+---
+# vars file for deploy_haproxy
+haproxy_backend_balance_method: 'roundrobin'
+haproxy_backend_httpchk: ''
+haproxy_backend_servers:
+  - name: app01
+    address: app01.local:80
+  - name: app02
+    address: app02.local:80

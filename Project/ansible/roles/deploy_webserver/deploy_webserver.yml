@@ -8,6 +8,7 @@
     - role: deploy_webserver
       vars: 
         vm_name: "app01.local"  
+        server_name: "app.local"
     - role: geerlingguy.nginx 
       vars:
         vm_name: "app01.local"
@@ -22,6 +23,7 @@
     - role: deploy_webserver
       vars: 
         vm_name: "app02.local"
+        server_name: "app.local"
     - role: geerlingguy.nginx 
       vars: 
         vm_name: "app02.local" 

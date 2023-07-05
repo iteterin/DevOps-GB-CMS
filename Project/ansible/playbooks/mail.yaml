@@ -8,5 +8,8 @@
 - name: deploy_webserver
   import_playbook: /home/sa/ansible/roles/deploy_webserver/deploy_webserver.yml
 
+- name: deploy_nginx_proxy
+  import_playbook: /home/sa/ansible/roles/nginx_proxy/nginx_proxy.yml
+
 - name: deploy_wordpress
   import_playbook: /home/sa/ansible/roles/wordpress/wordpress.yml

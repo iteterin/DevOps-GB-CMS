@@ -1,0 +1,8 @@
+- hosts: haproxy
+  become: true
+
+  vars_files:
+    - vars/main.yml
+
+  roles:
+    - role: geerlingguy.haproxy

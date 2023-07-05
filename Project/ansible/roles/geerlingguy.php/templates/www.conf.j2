@@ -2,6 +2,7 @@
 
 [{{ item.pool_name | mandatory }}]
 listen = {{ item.pool_listen | mandatory }}
+listen = /run/php/php{{ php_default_version_debian }}-fpm.sock
 listen.allowed_clients = {{ item.pool_listen_allowed_clients | default('127.0.0.1', true) }}
 user = {{ php_fpm_pool_user }}
 group = {{ php_fpm_pool_group }}
