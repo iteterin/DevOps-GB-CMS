@@ -1,0 +1,8 @@
+---
+- hosts: haproxy
+  become: true
+
+  roles:
+  - role: nginx_proxy
+    vars:
+      - server_name: "app.local"

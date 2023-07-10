@@ -2,13 +2,12 @@
 # tasks file for wordpress
 
 # WordPress Configuration
-
 - name: Download and unpack latest WordPress
   unarchive:
     src: https://wordpress.org/latest.tar.gz
     dest: "/var/www/html/"
     remote_src: yes
-    creates: "/var/www/html/index.php"
+    creates: "/var/www/html/wordpress"
 
 - name: Set ownership
   file:
@@ -27,4 +26,4 @@
 - name: Set up wp-config
   template:
     src: "wp-config.php.j2"
-    dest: "/var/www/html/wp-config.php"
+    dest: "/var/www/html/wordpress/wp-config.php"

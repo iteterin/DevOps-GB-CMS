@@ -1,0 +1,16 @@
+---
+# tasks file for nginx_proxy
+
+- name: install nginx
+  yum: name=nginx state=latest
+  when: ansible_os_family == "Debian" or ansible_os_family == "Ubuntu"
+
+- name: install conf
+  template: src=proxy.conf.j2 dest=/etc/nginx/conf.d/vhost1.conf
+  tags: conf
+  notify: restart nginx
+
+- name: install nginx.conf
+  copy: src=nginx.conf  dest=/etc/nginx/sites-available/default
+- name: start nginx
+  service: name=nginx state=started

@@ -1,0 +1,14 @@
+upstream websrv {
+    server 10.78.1.46:80;
+    server 10.78.1.47:80;
+}
+ 
+server {
+    listen 80 default_server;
+    server_name "{{ server_name }}";
+    location / {
+        proxy_pass http://websrv/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forward-For $remote_addr;
+    }
+}
